@@ -109,13 +109,12 @@ async function runTestSuite() {
     'Closed due to heavy street traffic outside'
   );
   assert(closeResult.success === true, 'Authorized safety officer can close gate');
-  assert(closeResult.alertCreated !== undefined, 'Closing exit gate automatically generates verified safety alert');
-  assert(closeResult.alertCreated?.message.includes('Gate 3 (South Main Dispersal Exit) is temporarily closed'), 'Alert contains specific gate guidance');
+  assert(Boolean(closeResult.alertCreated?.message.includes('Gate 3 (South Main Dispersal Exit) is temporarily closed')), 'Alert contains specific gate guidance');
 
   // Check route to closed Gate 3 now fails safely
   const blockedRoute = VenueRouteEngine.calculateRoute(venue, 'node-bb-g1', 'node-bb-g3');
   assert(blockedRoute.found === false, 'Route planner rejects paths terminating at a CLOSED gate');
-  assert(blockedRoute.message?.includes('closed'), 'Planner outputs verified safety advisory instead of imaginary path');
+  assert(Boolean(blockedRoute.message?.includes('closed')), 'Planner outputs verified safety advisory instead of imaginary path');
 
   // Route to alternate open Gate 4 succeeds
   const alternateRoute = VenueRouteEngine.calculateRoute(venue, 'node-bb-g1', 'node-bb-g4');
