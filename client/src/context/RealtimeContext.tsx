@@ -189,9 +189,16 @@ export const RealtimeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
     connectWebSocket();
 
+    // Polling fallback: ensures live sync continues even in serverless environments like Vercel
+    const pollInterval = setInterval(() => {
+      fetchInitialData();
+      refreshAuditLogs();
+    }, 4000);
+
     return () => {
       if (ws) ws.close();
       if (reconnectTimeout) clearTimeout(reconnectTimeout);
+      clearInterval(pollInterval);
     };
   }, [fetchInitialData, refreshAuditLogs]);
 
@@ -203,6 +210,10 @@ export const RealtimeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         headers: getHeaders(),
         body: JSON.stringify({ status, notes }),
       });
+      if (res.ok) {
+        await fetchInitialData();
+        refreshAuditLogs();
+      }
       return res.ok;
     } catch (e) {
       console.error(e);
@@ -217,6 +228,10 @@ export const RealtimeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         headers: getHeaders(),
         body: JSON.stringify(metrics),
       });
+      if (res.ok) {
+        await fetchInitialData();
+        refreshAuditLogs();
+      }
       return res.ok;
     } catch (e) {
       console.error(e);
@@ -231,6 +246,10 @@ export const RealtimeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         headers: getHeaders(),
         body: JSON.stringify({ status }),
       });
+      if (res.ok) {
+        await fetchInitialData();
+        refreshAuditLogs();
+      }
       return res.ok;
     } catch (e) {
       console.error(e);
@@ -245,12 +264,17 @@ export const RealtimeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         headers: getHeaders(),
         body: JSON.stringify({ venueId, ...alertData }),
       });
+      if (res.ok) {
+        await fetchInitialData();
+        refreshAuditLogs();
+      }
       return res.ok;
     } catch (e) {
       console.error(e);
       return false;
     }
   };
+
 
   const resolveAlert = async (venueId: string, alertId: string): Promise<boolean> => {
     try {
@@ -339,6 +363,10 @@ export const RealtimeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         headers: getHeaders(),
         body: JSON.stringify({ action, ...params }),
       });
+      if (res.ok) {
+        await fetchInitialData();
+        refreshAuditLogs();
+      }
       return res.ok;
     } catch (e) {
       console.error(e);
