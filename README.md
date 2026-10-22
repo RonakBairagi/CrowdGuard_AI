@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # CrowdGuard AI — Real-Time Crowd Safety & Smart Navigation Platform
 
 > **Tagline:** *Detect the danger. Guide the crowd. Protect lives.*
@@ -165,3 +166,7 @@ In compliance with ethical AI and safety prototyping standards:
 2. **Optional Location:** Visitors are never tracked continuously; they can switch between simulated GPS and manual location selection.
 3. **No False Guarantees:** The risk engine provides trend awareness and early alerts, but does not claim to predict every emergency or guarantee crush prevention.
 4. **Offline Safeguards:** When offline, the app displays cached emergency numbers and safety directives with clear disclaimers that live crowd data may be outdated.
+=======
+# CrowdGuard_AI
+AI-powered crowd safety, real-time crowd monitoring, emergency alerts, and smart navigation for crowded public places.
+>>>>>>> 0b3b55b41dfec2572d0dee93064ce60a24e46369
