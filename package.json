@@ -1,0 +1,20 @@
+{
+  "name": "crowdguard-ai",
+  "version": "1.0.0",
+  "description": "CrowdGuard AI — Real-Time Crowd Safety & Smart Navigation Platform",
+  "scripts": {
+    "server": "cmd.exe /c \"cd server && npm run dev\"",
+    "client": "cmd.exe /c \"cd client && npm run dev\"",
+    "test": "cmd.exe /c \"cd server && npm test\"",
+    "build": "cmd.exe /c \"cd client && npm run build\""
+  },
+  "keywords": [
+    "crowd-safety",
+    "real-time-navigation",
+    "public-safety",
+    "smart-city",
+    "iot-sensor-analytics"
+  ],
+  "author": "CrowdGuard AI Team",
+  "license": "MIT"
+}
